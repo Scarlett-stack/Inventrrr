@@ -1,0 +1,6 @@
+env, dev_env,
+venv, env_dev,
+prod_env_pro
+
+ALTER ROLE inventar_admin WITH PASSWORD 'parolastudent1@'
+postgres-# 

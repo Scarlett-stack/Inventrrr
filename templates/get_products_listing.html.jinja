@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Products</title>
+    <link href="{{ url_for('static', filename='style_table_all.css')}}" rel="stylesheet" />
+</head>
+
+<body>
+        <table>
+            <caption>
+                Product table list
+            </caption>
+            <thead>
+                <tr>
+                    <!-- <th scope="col">ID</th> -->
+                    <th scope="col">Name</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Code</th>
+                </tr>
+            </thead>
+        <tbody>
+             {% for product in inventory %}
+             <tr>
+                <th scope="row">{{ product.product_name }}</th>
+                <td> {{ product.product_brand }} </td>
+                <td> {{product.product_price }} </td>
+                <td> {{ product.product_code}} </td>
+             </tr>
+             {% endfor %}
+        </tbody>
+        </table>
+</body>

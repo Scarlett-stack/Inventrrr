@@ -4,3 +4,4 @@ Flask-SocketIO==5.5.1
 psycopg2-binary==2.9.10
 python-socketio==5.13.0
 python-engineio==4.12.2
+rich==15.0.0

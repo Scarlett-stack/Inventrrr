@@ -5,6 +5,10 @@ __pycache__
 
 # created environments
 env_inventory_app
+dev_env
+
+# secrets
+settings.ini
 
 # flask
 instance/

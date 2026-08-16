@@ -36,8 +36,8 @@ def get_database_url():
     # pentru folosiri ulterioare
     # getenv are optiune 2 ca default in caz ca variabila data ca arg nu exista
     return os.getenv(
-        "DATABASE_URL",
-        "postgresql://localhost/inventory_db"
+        "DATABASE_URI",
+        "postgresql://localhost/inventar_db"
     )
 
 

@@ -1,0 +1,47 @@
+/*
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/304
+ e normal sa dea 304 inseamna not modified
+*/
+html {
+    font-family: "Helvetica", "Arial", sans-serif;
+    line-height: 1.5;
+}
+
+table {
+    --color: blueviolet;
+    display: table;
+    border-spacing: 2px;
+    /* nu folosim separate la border collapse: https://piccalil.li/blog/styling-tables-the-modern-css-way/ */
+    border-collapse: collapse;
+    box-sizing: border box;
+    text-indent: 0;
+    text-align: left;
+}
+
+thead {
+    background: var(--color);
+}
+
+thead th:nth-child(3),
+thead th:nth-child(4)
+td {
+    text-align: end;
+}
+tr {
+    border-bottom: 1px solid;
+}
+
+th,
+td {
+    border: 1px solid lightblue;
+    padding: 0.25rem 0.75rem
+}
+
+thead {
+    border-block-end: 2px solid;
+    background: whitesmoke;
+}
+
+tbody tr:nth-child(even) {
+    background: color-mix(in srgb, var(--color), transparent 60%);
+}

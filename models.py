@@ -3,7 +3,7 @@ from database import db
 from typing import Dict, Any
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String, Float, Integer, DateTime
-from datetime import datetime
+import datetime
 
 # Model e Base dar e mai elegant sa il punem ca atribut
 class InventoryTable(db.Model):
@@ -25,12 +25,13 @@ class InventoryTable(db.Model):
     product_name: Mapped[str] = mapped_column(String(100), unique=True)
     # TODO: asigura-te ca nu scade sub 0
     product_quantity: Mapped[int] = mapped_column(Integer)
-    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now(), onupdate=datetime.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
 
     def convert_to_dict(self) -> Dict[str, Any]:
         # vezi ca e un pic diferit de ce avem noi la inventar
         # am acel updated_at 
         # TODO: adaugat updated at in clasa Inventory
+        # TODO : ADAUGAT DESCRIERE PRODUSE SI FISA TEHNICA 
         return {
             "uuid": self.product_id,
             "code": self.product_code,
