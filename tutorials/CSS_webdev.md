@@ -6,3 +6,5 @@
 **Cum accesez variabile?**
 - cu `var()` de obicei se stocheaza o culoare
 </p>
+
+O SA FOLOSIM BULMA SAU CEVA ADICA UN FRAMEOWRK CA NU INTELEG NIMIC DIN CSS E GROAZNIC

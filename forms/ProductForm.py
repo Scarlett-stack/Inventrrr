@@ -3,7 +3,7 @@ from tokenize import String
 from flask_wtf import FlaskForm
 from h11 import Data
 from wtforms import FloatField, StringField, IntegerField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, InputRequired, Length
 
 # mao multe tipuri de fields:
 # https://wtforms.readthedocs.io/en/stable/fields/#basic-fields
@@ -23,7 +23,7 @@ class ProductForm(FlaskForm):
                                 [DataRequired("Need product brand!"), Length(max=64)])
 
     product_quantity = IntegerField('Product Quantity', validators=
-                                    [DataRequired('Need product quantity')])
+                                    [InputRequired()])
 
     submit = SubmitField('Submit')
 

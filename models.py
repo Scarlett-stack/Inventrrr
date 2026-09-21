@@ -23,15 +23,16 @@ class InventoryTable(db.Model):
     product_brand: Mapped[str] = mapped_column(String(64))
     product_price: Mapped[float] = mapped_column(Float)
     product_name: Mapped[str] = mapped_column(String(100), unique=True)
-    # TODO: asigura-te ca nu scade sub 0
+    # TODO [x]: asigura-te ca nu scade sub 0 --vezi jinja
     product_quantity: Mapped[int] = mapped_column(Integer)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
 
     def convert_to_dict(self) -> Dict[str, Any]:
         # vezi ca e un pic diferit de ce avem noi la inventar
         # am acel updated_at 
-        # TODO: adaugat updated at in clasa Inventory
-        # TODO : ADAUGAT DESCRIERE PRODUSE SI FISA TEHNICA 
+        # TODO [x]: adaugat updated at in clasa Inventory
+        # TODO []: ADAUGAT DESCRIERE PRODUSE SI FISA TEHNICA --trb facuta o migrare
+        # TODO [] : ADAUGAT CAMP PT POZA
         return {
             "uuid": self.product_id,
             "code": self.product_code,

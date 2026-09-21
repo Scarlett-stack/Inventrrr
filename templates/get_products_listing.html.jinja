@@ -2,6 +2,9 @@
 <head>
     <meta charset="utf-8">
     <title>Products</title>
+    <!-- viewport randeaza scalat la width deviceului deci nu iti micsoreaza aiurea textul
+    https://web.dev/learn/html/document-structure#viewport_metadata -->
+    <meta name="viewport" content="width=device-width" />
     <link href="{{ url_for('static', filename='style_table_all.css')}}" rel="stylesheet" />
 </head>
 
@@ -16,16 +19,43 @@
                     <th scope="col">Name</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">Code</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
         <tbody>
              {% for product in inventory %}
              <tr>
-                <th scope="row">{{ product.product_name }}</th>
-                <td> {{ product.product_brand }} </td>
-                <td> {{product.product_price }} </td>
-                <td> {{ product.product_code}} </td>
+             <!-- formaction se foloseste doar in cadrul unui atribut form! SI DOAR CU BUTOANE DE TIP SUBMIT -->
+             <!-- exemplu form action: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Sending_and_retrieving_form_data -->
+             <!-- TREBUIE PUS NAME SI VALUE LA INPUT TYPE ALTFEL NU IL PUNE IN REWUESTULD E FORMS -->  
+            <!-- TODO [] DE REPARAT CHESTIA CU CLASS INLINE INPUT ADAUGAT DEIFNITE IN STYE.CSS -->
+                <form action="{{ url_for('update_product', product_id=product.product_id) }}" method="POST">
+                <th scope="row">
+                    <input type="text" name="product_name" value="{{ product.product_name }}" class="form-inline-input">
+                </th>
+                <td> 
+                    <input type="text" name="product_brand" value="{{ product.product_brand }}" class="form-inline-input">
+                </td>
+                <td> 
+                    <input type="number" step="0.01"  min="0" name="product_price" value="{{ product.product_price }}" class="form-inline-input">
+                </td>
+                <td> 
+                    <input type="number" step="1" min="0" name="product_quantity" value="{{ product.product_quantity }}" class="form-inline-input">
+                </td>
+                <td> 
+                    <input type="text" name="product_code" value="{{ product.product_code}}" class="form-inline-input">
+                </td>
+                <!-- hidden button care pemrite salvare la enter NU FOLOSIM button 
+                https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/submit -->
+                <input type="submit" style="display: none" />
+                </form>
+                <td>
+                    <form action="{{ url_for('delete_product', product_id=product.product_id) }}" method="POST">
+                    <button type="submit" onclick="return confirm('Are you sure you wnat to delete?');">Delete product</button> 
+                    </form>
+                </td>
              </tr>
              {% endfor %}
         </tbody>
