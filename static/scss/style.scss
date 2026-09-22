@@ -1,0 +1,8 @@
+// Load Bulma's base styles and themes (including the minireset)
+@use "../../node_modules/bulma/sass/base";
+@use "../../node_modules/bulma/sass/themes";
+
+// Load other Bulma components
+@use "../../node_modules/bulma/sass/elements/button";
+@use "../../node_modules/bulma/sass/components/message";
+@use "../../node_modules/bulma/sass/layout/hero.scss";

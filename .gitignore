@@ -3,6 +3,9 @@ __pycache__
 *.py[codz]
 *$py.class
 
+# other useless extensions
+*.zip
+
 # created environments
 env_inventory_app
 dev_env
@@ -20,3 +23,6 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+# node stuff
+node_modules/

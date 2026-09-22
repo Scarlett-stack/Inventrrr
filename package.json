@@ -1,0 +1,29 @@
+{
+  "name": "inventrrr",
+  "version": "1.0.0",
+  "description": "npm stuff for bulma",
+  "keywords": [
+    "bulma"
+  ],
+  "homepage": "https://github.com/Scarlett-stack/Inventrrr#readme",
+  "bugs": {
+    "url": "https://github.com/Scarlett-stack/Inventrrr/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scarlett-stack/Inventrrr.git"
+  },
+  "license": "ISC",
+  "author": "Scarlett-stack",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bulma": "^1.0.4"
+  },
+  "devDependencies": {
+    "sass": "^1.104.1"
+  }
+}

@@ -1,5 +1,62 @@
 <!DOCTYPE html>
-
+<head>
+    <meta charset="utf-8">
+    <!-- trebuie sa dam fisierul compilat de css din scss -->
+     <!-- FOARTE UTIL: DACA AI NESTED DIRS LE PUI LA FILENAME LA PRIMUL ARGUMENT LASI DOAR DIR DE BAZA -->
+    <!-- SI NU SE PUN GHILIMELE DUBLE IN HREF https://flask.palletsprojects.com/en/stable/tutorial/static/ -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
 <body>
-    <p>Pisi miau welcome to Forensic Site</p>
+    <div class="hero is-fullheight is-primary">
+        <!-- TREBUIE SI UN HERO HEAD-->
+         <div class="hero-head">
+            <!-- nu pune navbar si navbar-menu in acelasi div-->
+            <nav class="navbar">
+                <div class="container">
+                    <!-- navbar contine brand, item menu divider etc https://bulma.io/documentation/components/navbar/-->
+                     <div class="navbar-brand">
+                        <!-- cu anchor bagi href/links la images sau pagini-->
+                          <a class="navbar-item">
+                            <!-- din pacate nu merge asa cu path direct iar flask vrea din static imaginile https://stackoverflow.com/questions/28207761/where-does-flask-look-for-image-files -->
+                            <!-- care e faza cu endpoints: url for cere chestii cu decorator din flask-->
+                             <!-- static este un endpoint special creat automat de flask deci doar de acolo poti sa pui!-->
+                              <!-- regula: click pe logo duce la home facem cu smeckerie https://stackoverflow.com/questions/4855168/what-is-href-and-why-is-it-used-->
+                            <img src="{{ url_for('static', filename='pictures/2.png')}}" alt="Logo">
+                         </a>                           
+                        <!-- pentru meniul burger punem 3 spanuri adica 3 linii -->
+                         <span class="navbar-burger burger" data-target="navbarMenuHeroB">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                         </span>
+                     </div>
+                     <div id="navbarMenuHeroB" class="navbar-menu">
+                        <div class="navbar-end">
+                            <!-- punem la final chestiile deci avem logo + chestii in ordinea asta -->
+                             <a class="navbar-item is-active">
+                                Home
+                             </a>
+                             <a class="navbar-item is-active">
+                                Logout
+                             </a>
+                             <a class="navbar-item is-active">
+                                Mode <!-- penteu dark mode dar lasam pe mai tarziu-->
+                             </a>
+                        </div>
+                     </div>
+                </div>
+            </nav>
+         </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+            <h2 class="title is-2">Welcome to your Inventary</h2>
+            <!-- o sa crea o lista de butoane si o sa incerc sa o pozitionez in centru-->
+            <!-- span se folosetse ca sa aplici selectiv pe anumite portiuni chestii nu e necesar aici -->
+            <div class="buttons is-centered">
+                <a href="{{ url_for('get_products') }}" class="button is-link is-normal is-focused">Product Listing</a>
+                <a href="{{ url_for('add_product') }}" class="button is-link is-normal is-focused">Add product</a>
+            </div>
+        </div>
+        </div>
+    </div>
 </body>
