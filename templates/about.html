@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
+    <!-- viewport randeaza scalat la width deviceului deci nu iti micsoreaza aiurea textul NU UITA ASTA NICIODATA!!!
+    https://web.dev/learn/html/document-structure#viewport_metadata -->
+    <!-- De asemneea pentru responsivness putem adauga si initial scale care seteaza zoom level initial indiferent de dimensiunea ecranului. Se pune pe 1 pt 100%. Utila pt mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- trebuie sa dam fisierul compilat de css din scss -->
      <!-- FOARTE UTIL: DACA AI NESTED DIRS LE PUI LA FILENAME LA PRIMUL ARGUMENT LASI DOAR DIR DE BAZA -->
     <!-- SI NU SE PUN GHILIMELE DUBLE IN HREF https://flask.palletsprojects.com/en/stable/tutorial/static/ -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
-    <div class="hero is-fullheight is-primary">
+    <div class="hero is-fullheight is-light">
         <!-- TREBUIE SI UN HERO HEAD-->
          <div class="hero-head">
-            <!-- nu pune navbar si navbar-menu in acelasi div-->
-            <nav class="navbar">
+            <!-- nu pune navbar si navbar-menu in acelasi div , nu stiu de ce nu merge is-white -->
+            <nav class="navbar is-bordered" style="border-bottom: 2px solid pink;">
                 <div class="container">
                     <!-- navbar contine brand, item menu divider etc https://bulma.io/documentation/components/navbar/-->
                      <div class="navbar-brand">
-                        <!-- cu anchor bagi href/links la images sau pagini-->
-                          <a class="navbar-item">
+                        <!-- cu anchor bagi href/links la images sau pagini. DE CE NU MERGE???-->
+                          <a class="navbar-item" href="#">
                             <!-- din pacate nu merge asa cu path direct iar flask vrea din static imaginile https://stackoverflow.com/questions/28207761/where-does-flask-look-for-image-files -->
                             <!-- care e faza cu endpoints: url for cere chestii cu decorator din flask-->
                              <!-- static este un endpoint special creat automat de flask deci doar de acolo poti sa pui!-->
                               <!-- regula: click pe logo duce la home facem cu smeckerie https://stackoverflow.com/questions/4855168/what-is-href-and-why-is-it-used-->
-                            <img src="{{ url_for('static', filename='pictures/2.png')}}" alt="Logo">
-                         </a>                           
+                               <!-- avem probleme e prea mare  
+                                30% DIN CE? din width container/ ecran la tine
+                                -->
+                               <img src="{{ url_for('static', filename='pictures/logo_reduced.png')}}" alt="Logo"
+                               style="width:auto;
+                               max-height: 10rem;
+                               margin-top: 5px;
+                               margin-left: 5px;"
+                               >
+                         </a>                          
                         <!-- pentru meniul burger punem 3 spanuri adica 3 linii -->
                          <span class="navbar-burger burger" data-target="navbarMenuHeroB">
                             <span></span>
@@ -30,16 +42,17 @@
                             <span></span>
                          </span>
                      </div>
+                     <!-- cica trb scos navbar menu?? class="navbar-menu" ca sa se duca unde trb? Nu merge PUNEL LA LOC-->
                      <div id="navbarMenuHeroB" class="navbar-menu">
-                        <div class="navbar-end">
-                            <!-- punem la final chestiile deci avem logo + chestii in ordinea asta -->
-                             <a class="navbar-item is-active">
+                        <div class="navbar-end" style="margin-right: 10px;">
+                            <!-- punem la final chestiile deci avem logo + chestii in ordinea asta si scoate is-active pentru ca asta aparae cand apesi butonul -->
+                             <a class="navbar-item" href="#">
                                 Home
                              </a>
-                             <a class="navbar-item is-active">
+                             <a class="navbar-item" href="#">
                                 Logout
                              </a>
-                             <a class="navbar-item is-active">
+                             <a class="navbar-item" href="#">
                                 Mode <!-- penteu dark mode dar lasam pe mai tarziu-->
                              </a>
                         </div>
@@ -48,15 +61,37 @@
             </nav>
          </div>
         <div class="hero-body">
+            <!-- problema cu acest container: e centrat si nu arata bine. Fix: il punem intr-un box. Pardon container!-->
+            <!-- <section class="section">
+                <div class="container">
+                    <div class="columns is-centered">
+                        <div class="column is-one-third">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h4 class="title is-4">Actions</h4>
+                                    o sa crea o lista de butoane si o sa incerc sa o pozitionez in centru
+                                     span se folosetse ca sa aplici selectiv pe anumite portiuni chestii nu e necesar aici 
+                                    <div class="buttons is-centered">
+                                        <a href="{{ url_for('get_products') }}" class="button is-link is-normal is-focused">Product Listing</a>
+                                        <a href="{{ url_for('add_product') }}" class="button is-link is-normal is-focused">Add product</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+            <!-- nu pune color in class box pentru ca e suprascris de clasa box (ba nu). De asemenea color e pt text , backgroun color e pt bg-->
             <div class="container has-text-centered">
-            <h2 class="title is-2">Welcome to your Inventary</h2>
-            <!-- o sa crea o lista de butoane si o sa incerc sa o pozitionez in centru-->
-            <!-- span se folosetse ca sa aplici selectiv pe anumite portiuni chestii nu e necesar aici -->
-            <div class="buttons is-centered">
-                <a href="{{ url_for('get_products') }}" class="button is-link is-normal is-focused">Product Listing</a>
-                <a href="{{ url_for('add_product') }}" class="button is-link is-normal is-focused">Add product</a>
+                <!-- pui la box pt bg color: has-background-info-light-->
+                <div class="box" style="max-width: 420px; margin: 0 auto; padding: 2rem; background-color: cornsilk;">
+                    <h2 class="title is-2 has-text-dark mb-4">Actions</h2>
+                        <div class="buttons is-centered">
+                            <a href="{{ url_for('get_products') }}" class="button is-link is-normal is-focused">Product Listing</a>
+                            <a href="{{ url_for('add_product') }}" class="button is-link is-normal is-focused">Add product</a>
+                        </div>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 </body>

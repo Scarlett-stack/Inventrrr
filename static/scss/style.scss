@@ -6,3 +6,29 @@
 @use "../../node_modules/bulma/sass/elements/button";
 @use "../../node_modules/bulma/sass/components/message";
 @use "../../node_modules/bulma/sass/layout/hero.scss";
+
+// load navbar
+@use "../../node_modules/bulma/sass/components/navbar";
+// pentru spatiere!!
+@use "../../node_modules/bulma/sass/helpers";
+
+// pentru linii separatoare?
+@use "../../node_modules/bulma/sass/grid/columns";
+
+// pentru containere si box?
+@use "../../node_modules/bulma/sass/components/card";
+// solutie nucleara importeaza tot
+// @use "../../node_modules/bulma/sass/components";
+
+// PERSONALIZARE
+// nu merge asa ditch it, e din cauza versiunii de sass. BA MERGE NU TE MAI LUA DUPA PORCARIILE ALEA DE PE GEEKS A SUNT VECHI
+
+.navbar{
+    --bulma-navbar-background-color: bisque;
+}
+// un element a (Anchor ) din clasa navbar-item! Altfel ti-l ignora
+a.navbar-item{
+    &:hover{
+        background-color: pink;
+    }
+}

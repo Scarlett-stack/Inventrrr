@@ -3,11 +3,13 @@
 ## TODOS
 
 - [x] TODO 1.1: Customize welcome page and add butons to redirect to display and add product
-- [] TODO 1.2: Refactor size, fit banner, adjust upper navbar menu
+- [x] TODO 1.2: Refactor size, fit banner, adjust upper navbar menu
 - [] TDOO 2: Customize and add a login page 
 - [] TODO 3: Implement dark mode toggle
+- [] TODO 3.1: Implement icons for navbar menu items
 - [] TODO 4: Customize product listing table 
 - [] TODO 5: Customize product add page
+- [] TODO 6: Implement scroll menu for cards in home page
 
 ## LOGS
 
@@ -64,7 +66,7 @@ Eu am instalat bulma dar naiba stie unde ca trebuie in radacina proiectului. De 
 
 Ideea e ca nu e bine s afolosest `-g` pentru ca instaleaza pachetul global in sistem -> portabilitate 0. Proiectele descarcate ar trb sa aiba requremnts in `package.json` ceea cu `-g` nu se intampla.
 
-Vom folosi `--save-dev` pentru a instala doar in development. Va fi deja inclus in productie.
+Vom folosi `--save-dev` pentru a instala doar in development. Va fi deja inclus in productie. NU INSTALA NICIODATA IN PRODUCTIE
 
 ```
 # IN FOLDERUL RADACINA PROIECTULUI!!!
@@ -111,3 +113,64 @@ OK ASTA IL PUNEM LA PAGINA DE START SI AL ACU CASUTA DE CAUTARE IL PUNEM LA TABE
 TEMPLATE GRATIS : https://versions.bulma.io/0.7.0/documentation/layout/hero/
 
 NAVBAR: https://bulma.io/documentation/components/navbar/
+
+
+### LOG 30 SEPTEMBRIE
+
+- am reusit sa facem mai mica poza: se poate seta direct cu css niste dimensiuni sau poti cu procent eu am folosit dimensiuni
+https://stackoverflow.com/questions/2233076/how-to-resize-an-image-in-pure-html-css-while-keeping-its-proportions
+
+
+### LOG 4 OCTOMBRIE
+
+- am schimbat dimensiunile imaginii in procente pentru ca aparent toata lume ape stack overflow asa face
+- problema noua: imi pune aiurea butoanele alea cu link din meniu. Si inainte facea asa dar le impingea efectiv sub. Acuma se suprapune cu imaginea
+- Da, este o problema de viewport: adica partea de ecran care se afseaza curent. In exemplele cu bulma nu exista sectiune de head acolo, unde dai instructiuni pt afisare si chestii de chars si alte cacaturi https://developer.mozilla.org/en-US/docs/Glossary/Layout_viewport
+
+- Ok deci am scos div intermediar de dianinte de img (cel din a>) si am bagat stilul direct in tagul de imagine. 
+- Ce a rrezolvat problema a fost faptul ca am importat componenta navbar din bulma in fisierul .scss 
+
+- Am importat `helpers` (@use "../../node_modules/bulma/sass/helpers";) si a rezzolvat problema cu centrarea body-ului hero. 
+- Inca am butoanele prea in dreapta la meniul de sus
+- Si nu am linia separatoar intre navbar si body (banuies ca trb imprtate alea di  grid?)
+- Pentru stilat am gasit chestia asta: https://www.testmuai.com/blog/bulma-css-framework/ (de asemenea gemini halucineaza si inventeaza componente de stil care nu exista)
+- O sa folosim sections in loc de containers a ca nu prea inteleg ce se intampla acolo: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/section
+- Ideea e ca trb sa aiba un header astea idk
+- SI organizate pe columns !! https://bulma.io/documentation/columns/ si cards: https://bulma.io/documentation/components/card/
+- mda nush arata oribil si nu se incadreaza bine butoanele facem cu card
+
+Tip de componentă,max-width recomandat,Motivație
+Carduri de acțiuni / Pop-up-uri simple,380px – 420px,"Compact, ideal pentru 2 butoane sau un mesaj rapid."
+Formulare de Login / Register,400px – 480px,Spațiu perfect pentru input-uri de text și etichete (labels).
+Formulare complexe (Add Product),600px – 700px,Oferă loc pentru 2 coloane de input-uri (ex: Nume
+Tabele de date / Dashboard,960px – 1200px,Necesită lățime mare pentru coloane multiple.
+
+
+- smeckeria cu 0 auto: https://stackoverflow.com/questions/3170772/what-does-auto-do-in-margin-0-auto
+
+- SPACING HELPERS FOARTE IMPORTANT SE APLICA PENTRU ELEMENTUL CURENT: https://bulma.io/documentation/helpers/spacing-helpers/
+
+Cum facem sa bagam un meniul scrolling in centru cu cardurile alea?
+
+Deci putem sa ne folosim de scrollul implicit al paginii: Columns Responsiveness: Bulma Column Layouts
+
+Cum le grupezi: Pui un wrapper `<div class="columns is-multiline is-centered">`, iar fiecare card stă într-un `<div class="column is-4">` . Cica pe tel se face stacking cu fiecare card.
+Sau:
+Le bagi pe toate intrun container si trbs a permiti overflow: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow
+
+- Am schimbat theme in ceva mai light problema e ca hoverul implicit e light si nu se vede cum trebuie
+- E timpul s amodificam variabile sass!! Mergem in fisierul scss. Putem sa le punem si inainte si dupa dar eu o sa le pun dupa. I de aici de jos: https://bulma.io/documentation/components/navbar/
+
+Sa ma bata mama ca nici nu s0-au deranjat sa puna toat ealea le-am gasit aici: https://www.geeksforgeeks.org/css/bulma-navbar-variables/
+Sinataxa e asa: `$property-name: property-value;`
+
+- Nevermind aparent s-a updatat cacatul asta si nu merge decat cu with nu mai merge a adefinesti tu separat vezi aici: https://bulma.io/documentation/customize/with-sass/
+
+- Deci ce inseamna `!important` ? Practic ii spui browserului sa ignore orice alta regula de oriunde altundeva care ar mai exista pe elementul ala si sa foloseasc ace ai definit tu. Altfel s-ar lua in ordine si s-ar aplica ultima!
+
+- O SA FOLOSIM DOAR METODA DE VARIABILE CSS NU SCSS PENTRU CA E MAI USOR ASA DE GASIT: https://bulma.io/documentation/features/css-variables/
+
+Este o metoda standard in css: https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties
+
+- De ce zic a e mai usor? Tocmai am cautat hover in fisierul sursa de navbar si am gasit ceva dubios cu delta si cum calculeaza bulma luminosiztatea nu vrei asa ceva crede-ma.
+
